@@ -1,0 +1,66 @@
+{
+  "global": {
+    "title": "Command Terminal Hub",
+    "autoStartOnBoot": true,
+    "bufferChars": 50000,
+    "defaultCwd": ".",
+    "defaultShell": "powershell.exe",
+    "defaultEnv": {}
+  },
+  "commands": [
+    {
+      "id": "api-server",
+      "name": "API Server",
+      "command": "pnpm run dev",
+      "autoStart": true,
+      "cwd": "./api",
+      "env": {},
+      "shell": "powershell.exe"
+    },
+    {
+      "id": "web",
+      "name": "Web",
+      "command": "pnpm run dev",
+      "autoStart": true,
+      "cwd": "./web",
+      "env": {},
+      "shell": "powershell.exe"
+    },
+    {
+      "id": "shared-dev",
+      "name": "Shared Dev",
+      "command": "pnpm run dev",
+      "autoStart": true,
+      "cwd": "./shared",
+      "env": {},
+      "shell": "powershell.exe"
+    },
+    {
+      "id": "api-migration-run",
+      "name": "API Run Migrations",
+      "command": "node ace migration:run",
+      "autoStart": false,
+      "cwd": "./api",
+      "env": {},
+      "shell": "powershell.exe"
+    },
+    {
+      "id": "api-migration-rollback",
+      "name": "API Rollback Migrations",
+      "command": "node ace migration:rollback",
+      "autoStart": false,
+      "cwd": "./api",
+      "env": {},
+      "shell": "powershell.exe"
+    },
+    {
+      "id": "api-db-seed",
+      "name": "API Seed Database",
+      "command": "node ace db:seed",
+      "autoStart": false,
+      "cwd": "./api",
+      "env": {},
+      "shell": "powershell.exe"
+    }
+  ]
+}

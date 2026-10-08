@@ -1,0 +1,1127 @@
+/* =========================================================
+   APP DESIGN SYSTEM
+   Tailwind CSS v4 + PrimeVue
+   ========================================================= */
+
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+
+/*
+ * Tailwind dark mode.
+ *
+ * Keep this selector identical to PrimeVue's darkModeSelector.
+ *
+ * Add "dark" to <html> to enable dark mode.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  --br-page-width: 80rem;
+
+  /* -------------------------------------------------------
+     Radius
+     Change these once to change the whole app.
+     ------------------------------------------------------- */
+
+  --br-radius: 0.5rem;
+  --br-radius-card: 0.75rem;
+  --br-radius-section: 1rem;
+  --br-radius-pill: 9999px;
+
+
+  /* -------------------------------------------------------
+     Borders
+     ------------------------------------------------------- */
+
+  --br-border-color: var(--p-surface-200);
+  --br-border-strong-color: var(--p-surface-300);
+
+
+  /* -------------------------------------------------------
+     Surfaces
+     ------------------------------------------------------- */
+
+  --br-page-bg: var(--p-surface-50);
+  --br-surface: var(--p-surface-0);
+  --br-surface-muted: var(--p-surface-50);
+  --br-surface-subtle: var(--p-surface-100);
+  --br-surface-hover: var(--p-surface-100);
+
+
+  /* -------------------------------------------------------
+     Text
+     ------------------------------------------------------- */
+
+  --br-text: var(--p-surface-900);
+  --br-text-muted: var(--p-surface-500);
+  --br-text-subtle: var(--p-surface-400);
+
+
+  /* -------------------------------------------------------
+     Spacing
+     ------------------------------------------------------- */
+
+  --br-space-xs: 0.5rem;
+  --br-space-sm: 0.75rem;
+  --br-space: 1rem;
+  --br-space-lg: 1.5rem;
+  --br-space-xl: 2rem;
+
+  --br-page-x: 1rem;
+  --br-page-y: 1rem;
+
+  --br-card-padding: 1rem;
+
+  --br-section-gap: 1.2rem;
+  --br-content-gap: 1rem;
+
+
+  /* -------------------------------------------------------
+     Shadows
+     ------------------------------------------------------- */
+
+  --br-shadow:
+    0 1px 2px rgb(0 0 0 / 0.05);
+
+  --br-shadow-popup:
+    0 10px 25px rgb(0 0 0 / 0.12);
+
+
+  /* -------------------------------------------------------
+     Layout widths
+     ------------------------------------------------------- */
+
+  --br-container-sm: 48rem;
+  --br-container: 80rem;
+  --br-container-lg: 96rem;
+  --br-form-container: 64rem;
+}
+
+
+/* =========================================================
+   DARK MODE TOKENS
+   ========================================================= */
+
+.dark {
+  color-scheme: dark;
+
+  --br-border-color: var(--p-surface-700);
+  --br-border-strong-color: var(--p-surface-600);
+
+  --br-page-bg: var(--p-surface-950);
+  --br-surface: var(--p-surface-900);
+  --br-surface-muted: var(--p-surface-800);
+  --br-surface-subtle: var(--p-surface-800);
+  --br-surface-hover: var(--p-surface-800);
+
+  --br-text: var(--p-surface-0);
+  --br-text-muted: var(--p-surface-400);
+  --br-text-subtle: var(--p-surface-500);
+
+  --br-shadow:
+    0 1px 3px rgb(0 0 0 / 0.35);
+
+  --br-shadow-popup:
+    0 12px 32px rgb(0 0 0 / 0.45);
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN TOKENS
+   ========================================================= */
+
+@media (min-width: 640px) {
+  :root {
+    --br-page-x: 1.25rem;
+    --br-page-y: 1.25rem;
+
+    --br-card-padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --br-page-x: 1.5rem;
+    --br-page-y: 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+
+    background-color: var(--br-page-bg);
+    color: var(--br-text);
+
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+}
+
+
+/* =========================================================
+   REUSABLE COMPONENT CLASSES
+   ========================================================= */
+
+@layer components {
+
+  /* =======================================================
+     SHAPE
+     ======================================================= */
+
+  .br-rounded {
+    border-radius: var(--br-radius);
+  }
+
+  .br-rounded-card {
+    border-radius: var(--br-radius-card);
+  }
+
+  .br-rounded-section {
+    border-radius: var(--br-radius-section);
+  }
+
+  .br-rounded-pill {
+    border-radius: var(--br-radius-pill);
+  }
+
+
+  /* =======================================================
+     BORDER
+     ======================================================= */
+
+  .br-border {
+    border: 1px solid var(--br-border-color);
+  }
+
+  .br-border-strong {
+    border: 1px solid var(--br-border-strong-color);
+  }
+
+  .br-divider {
+    border-color: var(--br-border-color);
+  }
+
+  .br-border-interactive {
+    border: 1px solid var(--br-border-color);
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .br-border-interactive:hover {
+    border-color: color-mix(in srgb, var(--p-primary-color) 50%, transparent);
+    background-color: var(--br-surface-hover);
+  }
+
+  .br-border-interactive:focus-within {
+    border-color: var(--p-primary-color);
+    box-shadow: 0 0 0 1px var(--p-primary-color);
+  }
+
+  .br-border-interactive:has(:checked) {
+    border-color: var(--p-primary-color);
+    background-color: color-mix(in srgb, var(--p-primary-color) 5%, var(--br-surface));
+  }
+
+  .br-border-interactive:has(:disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+
+  /* =======================================================
+     SURFACES
+     ======================================================= */
+
+  .br-surface {
+    background-color: var(--br-surface);
+    color: var(--br-text);
+  }
+
+  .br-surface-muted {
+    background-color: var(--br-surface-muted);
+    color: var(--br-text);
+  }
+
+  .br-surface-subtle {
+    background-color: var(--br-surface-subtle);
+  }
+
+  .br-page-bg {
+    background-color: var(--br-page-bg);
+  }
+
+
+  /* =======================================================
+     SHADOW
+     ======================================================= */
+
+  .br-shadow {
+    box-shadow: var(--br-shadow);
+  }
+
+  .br-shadow-popup {
+    box-shadow: var(--br-shadow-popup);
+  }
+
+
+  /* =======================================================
+     PAGE
+     ======================================================= */
+
+  .br-page {
+    @apply min-h-dvh;
+
+    background-color: var(--br-page-bg);
+    color: var(--br-text);
+    max-width: var(--br-page-width);
+  }
+
+  .br-page-fluid {
+    @apply min-h-dvh;
+
+    background-color: var(--br-page-bg);
+    color: var(--br-text);
+    width: 100%
+  }
+
+  .br-nav-link {
+    @apply flex w-full items-center gap-3 text-left text-sm;
+
+    min-height: 2.5rem;
+    padding: 0.625rem 0.75rem;
+
+    border: 1px solid transparent;
+    border-radius: var(--br-radius);
+
+    color: var(--br-text-muted);
+    background-color: transparent;
+
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  .br-nav-link:hover:not(:disabled) {
+    color: var(--br-text);
+    background-color: var(--br-surface-hover);
+  }
+
+  .br-nav-link:focus-visible {
+    outline: 2px solid var(--p-primary-color);
+    outline-offset: 2px;
+  }
+
+  .br-nav-link-active {
+    color: var(--p-primary-color);
+    background-color: color-mix(in srgb, var(--p-primary-color) 12%, var(--br-surface));
+  }
+
+  .br-nav-link:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .br-page-container {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+
+    padding-inline: var(--br-page-x);
+    padding-block: var(--br-page-y);
+  }
+
+  .br-page-header {
+    @apply flex flex-col gap-3;
+  }
+
+  @media (min-width: 640px) {
+    .br-page-header {
+      @apply flex-row items-center justify-between;
+    }
+  }
+
+  .br-page-actions {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .br-page-body {
+    margin-top: var(--br-space-lg);
+  }
+
+
+  /* =======================================================
+     CONTAINERS
+     ======================================================= */
+
+  .br-container {
+    width: 100%;
+    max-width: var(--br-container);
+    margin-inline: auto;
+  }
+
+  .br-container-sm {
+    width: 100%;
+    max-width: var(--br-container-sm);
+    margin-inline: auto;
+  }
+
+  .br-container-lg {
+    width: 100%;
+    max-width: var(--br-container-lg);
+    margin-inline: auto;
+  }
+
+  .br-form-container {
+    width: 100%;
+    max-width: var(--br-form-container);
+    margin-inline: auto;
+  }
+
+
+  /* =======================================================
+     SECTION
+     ======================================================= */
+
+  .br-section {
+    @apply flex flex-col;
+
+    gap: var(--br-section-gap);
+  }
+
+  .br-section-sm {
+    @apply flex flex-col;
+
+    gap: var(--br-space-sm);
+  }
+
+  .br-section-lg {
+    @apply flex flex-col;
+
+    gap: var(--br-space-xl);
+  }
+
+  .br-section-header {
+    @apply flex flex-col gap-2;
+  }
+
+  @media (min-width: 640px) {
+    .br-section-header {
+      @apply flex-row items-center justify-between;
+    }
+  }
+
+  .br-section-actions {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+
+  /* =======================================================
+     STACK / ROW
+     ======================================================= */
+
+  .br-stack {
+    @apply flex flex-col;
+
+    gap: var(--br-space);
+  }
+
+  .br-stack-sm {
+    @apply flex flex-col;
+
+    gap: var(--br-space-xs);
+  }
+
+  .br-stack-lg {
+    @apply flex flex-col;
+
+    gap: var(--br-space-lg);
+  }
+
+  .br-row {
+    @apply flex items-center;
+
+    gap: var(--br-space-sm);
+  }
+
+  .br-row-sm {
+    @apply flex items-center;
+
+    gap: var(--br-space-xs);
+  }
+
+  .br-content-gap {
+    gap: var(--br-content-gap);
+  }
+
+
+  /* =======================================================
+     CARD
+     ======================================================= */
+
+  .br-card {
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius-card);
+
+    background-color: var(--br-surface);
+    color: var(--br-text);
+
+    box-shadow: var(--br-shadow);
+
+    overflow: hidden;
+  }
+
+  .br-card-header {
+    padding: var(--br-card-padding);
+
+    border-bottom: 1px solid var(--br-border-color);
+  }
+
+  .br-card-body {
+    padding: var(--br-card-padding);
+  }
+
+  .br-card-footer {
+    padding: var(--br-card-padding);
+
+    border-top: 1px solid var(--br-border-color);
+  }
+
+
+  /* =======================================================
+     PANEL / BOX
+     ======================================================= */
+
+  .br-panel {
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius-card);
+
+    background-color: var(--br-surface);
+    color: var(--br-text);
+  }
+
+  .br-box {
+    padding: var(--br-space);
+
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius);
+
+    background-color: var(--br-surface);
+  }
+
+
+  /* =======================================================
+     TYPOGRAPHY
+     ======================================================= */
+
+  .br-page-title {
+    @apply text-xl font-semibold tracking-tight sm:text-2xl;
+
+    color: var(--br-text);
+  }
+
+  .br-page-description {
+    @apply mt-1 text-sm;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-section-title {
+    @apply text-base font-semibold sm:text-lg;
+
+    color: var(--br-text);
+  }
+
+  .br-section-description {
+    @apply text-sm;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-card-title {
+    @apply text-base font-semibold;
+
+    color: var(--br-text);
+  }
+
+  .br-label {
+    @apply text-sm font-medium;
+
+    color: var(--br-text);
+  }
+
+  .br-body {
+    @apply text-sm;
+
+    color: var(--br-text);
+  }
+
+  .br-small {
+    @apply text-xs;
+
+    color: var(--br-text);
+  }
+
+  .br-muted {
+    @apply text-sm;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-caption {
+    @apply text-xs;
+
+    color: var(--br-text-muted);
+  }
+
+
+  /* =======================================================
+     FORM
+     ======================================================= */
+
+  .br-form {
+    @apply flex flex-col;
+
+    gap: var(--br-space-lg);
+  }
+
+  .br-form-grid {
+    @apply grid grid-cols-1 md:grid-cols-2;
+
+    gap: var(--br-space);
+  }
+
+  .br-form-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+
+    gap: var(--br-space);
+  }
+
+  .br-field {
+    @apply flex min-w-0 flex-col;
+
+    gap: 0.375rem;
+  }
+
+  .br-field-full {
+    @apply col-span-full;
+  }
+
+  .br-form-section {
+    @apply flex flex-col;
+
+    gap: var(--br-space);
+  }
+
+  .br-form-actions {
+    @apply flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end;
+  }
+
+  .br-help {
+    @apply text-xs;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-error {
+    @apply text-xs text-red-500;
+  }
+
+  .br-required {
+    @apply text-red-500;
+  }
+
+
+  /* =======================================================
+     RESPONSIVE GRID
+     ======================================================= */
+
+  .br-grid {
+    @apply grid grid-cols-1;
+
+    gap: var(--br-content-gap);
+  }
+
+  .br-grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2;
+
+    gap: var(--br-content-gap);
+  }
+
+  .br-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
+
+    gap: var(--br-content-gap);
+  }
+
+  .br-grid-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4;
+
+    gap: var(--br-content-gap);
+  }
+
+  .br-auto-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+
+    gap: var(--br-content-gap);
+  }
+
+
+  /* =======================================================
+     TOOLBAR
+     ======================================================= */
+
+  .br-toolbar {
+    @apply flex flex-col gap-3;
+  }
+
+  @media (min-width: 768px) {
+    .br-toolbar {
+      @apply flex-row items-center justify-between;
+    }
+  }
+
+  .br-toolbar-start {
+    @apply flex flex-col gap-2;
+  }
+
+  @media (min-width: 640px) {
+    .br-toolbar-start {
+      @apply flex-row items-center;
+    }
+  }
+
+  .br-toolbar-end {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+
+  /* =======================================================
+     FILTER
+     ======================================================= */
+
+  .br-filter-bar {
+    @apply flex flex-col gap-3;
+  }
+
+  @media (min-width: 1024px) {
+    .br-filter-bar {
+      @apply flex-row items-end;
+    }
+  }
+
+  .br-search {
+    @apply w-full sm:max-w-sm;
+  }
+
+
+  /* =======================================================
+     ACTIONS
+     ======================================================= */
+
+  .br-actions {
+    @apply flex flex-col-reverse gap-2;
+  }
+
+  @media (min-width: 640px) {
+    .br-actions {
+      @apply flex-row items-center justify-end;
+    }
+  }
+
+  .br-sticky-actions {
+    @apply sticky bottom-0 z-20;
+
+    padding: var(--br-space-sm);
+
+    border-top: 1px solid var(--br-border-color);
+
+    background-color: var(--br-surface);
+  }
+
+  .br-mobile-actions {
+    @apply fixed inset-x-0 bottom-0 z-30 flex gap-2;
+
+    padding-top: var(--br-space-sm);
+
+    padding-right:
+      max(var(--br-space-sm), env(safe-area-inset-right));
+
+    padding-bottom:
+      max(var(--br-space-sm), env(safe-area-inset-bottom));
+
+    padding-left:
+      max(var(--br-space-sm), env(safe-area-inset-left));
+
+    border-top: 1px solid var(--br-border-color);
+
+    background-color: var(--br-surface);
+  }
+
+  @media (min-width: 640px) {
+    .br-mobile-actions {
+      @apply static justify-end;
+
+      padding: 0;
+
+      border-top: 0;
+
+      background: transparent;
+    }
+  }
+
+
+  /* =======================================================
+     LIST
+     ======================================================= */
+
+  .br-list {
+    @apply flex flex-col;
+  }
+
+  .br-list > * + * {
+    border-top: 1px solid var(--br-border-color);
+  }
+
+  .br-list-item {
+    @apply flex items-start gap-3;
+
+    padding-block: var(--br-space-sm);
+  }
+
+  .br-list-content {
+    @apply min-w-0 flex-1;
+  }
+
+  .br-list-title {
+    @apply truncate text-sm font-medium;
+
+    color: var(--br-text);
+  }
+
+  .br-list-meta {
+    @apply mt-1 text-xs;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-list-actions {
+    @apply shrink-0;
+  }
+
+
+  /* =======================================================
+     DETAILS / READ ONLY
+     ======================================================= */
+
+  .br-detail-grid {
+    @apply grid grid-cols-1 md:grid-cols-2;
+
+    column-gap: var(--br-space-lg);
+    row-gap: var(--br-space);
+  }
+
+  .br-info-row {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .br-info-label {
+    @apply text-xs font-medium;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-info-value {
+    @apply break-words text-sm;
+
+    color: var(--br-text);
+  }
+
+
+  /* =======================================================
+     EMPTY / ERROR / LOADING STATE
+     ======================================================= */
+
+  .br-state {
+    @apply flex min-h-48 flex-col items-center justify-center px-4 py-8 text-center;
+  }
+
+  .br-state-icon {
+    @apply mb-3 text-3xl;
+
+    color: var(--br-text-subtle);
+  }
+
+  .br-state-title {
+    @apply text-base font-semibold;
+
+    color: var(--br-text);
+  }
+
+  .br-state-description {
+    @apply mt-1 max-w-md text-sm;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-state-actions {
+    @apply mt-4 flex flex-wrap justify-center gap-2;
+  }
+
+
+  /* =======================================================
+     SCROLL / OVERFLOW
+     ======================================================= */
+
+  .br-scroll-x {
+    @apply overflow-x-auto overscroll-x-contain;
+  }
+
+  .br-scroll-y {
+    @apply overflow-y-auto overscroll-y-contain;
+  }
+
+  .br-table-scroll {
+    @apply w-full overflow-x-auto overscroll-x-contain;
+  }
+
+  .br-no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .br-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  /* =======================================================
+     MOBILE RECORD CARD
+     Useful instead of DataTable on small screens.
+     ======================================================= */
+
+  .br-record-card {
+    padding: var(--br-card-padding);
+
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius-card);
+
+    background-color: var(--br-surface);
+  }
+
+  .br-record-header {
+    @apply flex items-start justify-between gap-3;
+  }
+
+  .br-record-body {
+    @apply mt-3 flex flex-col gap-2;
+  }
+
+  .br-record-footer {
+    @apply mt-3 flex items-center justify-end gap-2;
+
+    padding-top: var(--br-space-sm);
+
+    border-top: 1px solid var(--br-border-color);
+  }
+
+
+  /* =======================================================
+     PAGE HEADER / BACK HEADER
+     ======================================================= */
+
+  .br-back-header {
+    @apply flex items-center gap-3;
+  }
+
+  .br-back-header-content {
+    @apply min-w-0 flex-1;
+  }
+
+  .br-back-header-title {
+    @apply truncate text-lg font-semibold;
+
+    color: var(--br-text);
+  }
+
+
+  /* =======================================================
+     STATS
+     ======================================================= */
+
+  .br-stat {
+    padding: var(--br-card-padding);
+
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius-card);
+
+    background-color: var(--br-surface);
+  }
+
+  .br-stat-label {
+    @apply text-sm;
+
+    color: var(--br-text-muted);
+  }
+
+  .br-stat-value {
+    @apply mt-1 text-2xl font-semibold tracking-tight;
+
+    color: var(--br-text);
+  }
+
+  .br-stat-description {
+    @apply mt-1 text-xs;
+
+    color: var(--br-text-muted);
+  }
+
+
+  /* =======================================================
+     STICKY HEADER
+     ======================================================= */
+
+  .br-sticky-header {
+    @apply sticky top-0 z-20;
+
+    border-bottom: 1px solid var(--br-border-color);
+
+    background-color: var(--br-surface);
+  }
+
+
+  /* =======================================================
+     OVERLAY / POPUP CONTAINER
+     For your own custom popups, not PrimeVue Dialogs.
+     ======================================================= */
+
+  .br-popup {
+    border: 1px solid var(--br-border-color);
+    border-radius: var(--br-radius-card);
+
+    background-color: var(--br-surface);
+    color: var(--br-text);
+
+    box-shadow: var(--br-shadow-popup);
+  }
+
+
+  /* =======================================================
+     INTERACTIVE CUSTOM CONTAINER
+     ======================================================= */
+
+  .br-interactive {
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .br-interactive:hover {
+    background-color: var(--br-surface-hover);
+  }
+
+
+  /* =======================================================
+     MOBILE BOTTOM SPACER
+     Use on pages containing br-mobile-actions.
+     ======================================================= */
+
+  .br-mobile-action-space {
+    padding-bottom: calc(
+      5rem + env(safe-area-inset-bottom)
+    );
+  }
+
+  @media (min-width: 640px) {
+    .br-mobile-action-space {
+      padding-bottom: 0;
+    }
+  }
+}
+
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+
+@layer utilities {
+
+  /* Safe area */
+
+  .br-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .br-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .br-safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .br-safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .br-safe-x {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .br-safe-y {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+
+  /* Text */
+
+  .br-text {
+    color: var(--br-text);
+  }
+
+  .br-text-muted {
+    color: var(--br-text-muted);
+  }
+
+  .br-text-subtle {
+    color: var(--br-text-subtle);
+  }
+
+
+  /* Background */
+
+  .br-bg {
+    background-color: var(--br-surface);
+  }
+
+  .br-bg-muted {
+    background-color: var(--br-surface-muted);
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ws",
+  "version": "1.0.0",
+  "description": "",
+  "packageManager": "pnpm@9.12.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "dev-terminal-hub --config ./terminal-hub.config.json",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "typecheck": "turbo typecheck",
+    "dev:shared": "pnpm --dir shared dev",
+    "dev:web": "pnpm --dir web-admin dev",
+    "dev:api": "pnpm --dir api dev",
+    "api:migration": "pnpm --dir api run migration",
+    "terminal": "node ./terminal/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dev-terminal-hub": "github:yaliniyalu/dev-terminal-hub",
+    "turbo": "^2.9.6"
+  }
+}
